@@ -1,0 +1,43 @@
+body{
+  background-color: #f7f4f0;
+}
+
+button{
+  margin-bottom: 10px;
+}
+
+
+
+.flexRow{
+  display: flex;
+  flex-direction: row;
+}
+
+.mainDisplay{
+  height: 100%;
+}
+
+.colorPane{
+  width: 20%;
+  height: 100%;
+}
+
+#color1{
+  background-color: #fdfdfd;
+}
+
+#color2{
+  background-color: #cccccc;
+}
+
+#color3{
+  background-color: #888888;
+}
+
+#color4{
+  background-color: #444444;
+}
+
+#color5{
+  background-color: #0f0f0f;
+}
