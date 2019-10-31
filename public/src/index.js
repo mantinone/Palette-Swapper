@@ -1,16 +1,17 @@
-let testColors = ['#00ffff','#00ff00','#ff00ff','#ff0000','#0000ff']
-
-function testing(){
-  console.log("Hello");
+const colorAlgorithms = {
+  TestColors: ()=> ['#00ffff','#00ff00','#ff00ff','#ff0000','#0000ff'],
+  Random: () => randomColors()
 }
 
 function generateColors(){
-  changePanelColor(randomColors())
+  let algorithm = document.getElementById('algorithmSelect').value
+  console.log(colorAlgorithms[algorithm]);
+  changePanelColor( colorAlgorithms[algorithm]() )
 }
 
 function changePanelColor(colors = testColors){
   let panes = document.getElementsByClassName('colorPane')
-  for (var i in panes){
+  for (var i = 0; i < panes.length; i++ ){
     panes[i].style.backgroundColor = colors[i]
   }
 }
