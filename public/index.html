@@ -3,6 +3,7 @@
     <meta charset="UTF-8">
     <title>Palette Swapper</title>
     <link rel="stylesheet" href="style.css">
+    <script src="src/objectClasses.js"></script>
     <script src="src/index.js"></script>
   </head>
 
@@ -10,6 +11,10 @@
     <h2>PALETTE SWAPPER!</h2>
     <div class="flexrow">
       <button onclick="generateColors()">Testing</button>
+      <select id="algorithmSelect">
+        <option>Random</option>
+        <option>TestColors</option>
+      </select>
     </div>
 
     <div class="flexrow mainDisplay">
