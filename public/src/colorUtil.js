@@ -1,5 +1,5 @@
 class Color {
-  constructor( r=0, g=0, b=0 ){
+  constructor( r=5, g=5, b=5 ){
       this.rgb = {r,g,b}
   }
 
@@ -16,11 +16,11 @@ class Color {
   }
 
   static colorFromHex( cssHex ){
-    return new Color( Color.hexToDec(cssHex.substr(2,2)), Color.hexToDec(cssHex.substr(4,2)), Color.hexToDec(cssHex.substr(6,2)) )
+    return new Color( Color.hexToDec(cssHex.substr(1,2)), Color.hexToDec(cssHex.substr(3,2)), Color.hexToDec(cssHex.substr(5,2)) )
   }
 
   toCSS(){
-    var cssString = '0x'
+    var cssString = '#'
     for ( var i in this.rgb ){
       cssString = cssString.concat( Color.decToHex(this.rgb[i]) )
     }
