@@ -1,15 +1,16 @@
 const colorAlgorithms = {
   TestColors: ()=> ['#00ffff','#00ff00','#ff00ff','#ff0000','#0000ff'],
-  Random: () => randomColors()
+  Random: () => randomColors(),
+  RandomOffsetRGB: () => randomOffsetRGB(),
+  TestFunction: () => testFunction()
 }
 
 function generateColors(){
   let algorithm = document.getElementById('algorithmSelect').value
-  console.log(colorAlgorithms[algorithm]);
   changePanelColor( colorAlgorithms[algorithm]() )
 }
 
-function changePanelColor(colors = testColors){
+function changePanelColor(colors){
   let panes = document.getElementsByClassName('colorPane')
   for (var i = 0; i < panes.length; i++ ){
     panes[i].style.backgroundColor = colors[i]
@@ -30,4 +31,29 @@ function randomHexColor(){
 
 function randomIntRange( max=255, min = 0){
   return Math.floor(Math.random()*(max-min+1)) + min
+}
+
+function randomOffsetRGB(){
+  let offset = 60
+  let colors = []
+  colors.push( randomHexColor() )
+  let baseColor = Color.colorFromHex( colors[0] )
+
+  for (var i = 1; i < 5; i++){
+    var offsetColor = new Color( calculateOffset(baseColor.rgb.r,offset), calculateOffset(baseColor.rgb.g,offset), calculateOffset(baseColor.rgb.b,offset))
+    colors.push( offsetColor.toCSS() )
+  }
+  return colors
+}
+
+function calculateOffset( value, offset ){
+   return clamp( value+randomIntRange(offset,-1*offset), 0, 255)
+ }
+
+function testFunction(){
+    console.log('Testing');
+}
+
+function clamp ( value, min, max ){
+  return value <= min ? min : value >= max ? max : value
 }
