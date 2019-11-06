@@ -34,7 +34,7 @@ function randomIntRange( max=255, min = 0){
 }
 
 function randomOffsetRGB(){
-  let offset = 30
+  let offset = 60
   let colors = []
   colors.push( randomHexColor() )
   let baseColor = Color.colorFromHex( colors[0] )
@@ -47,9 +47,13 @@ function randomOffsetRGB(){
 }
 
 function calculateOffset( value, offset ){
-   return value+randomIntRange(offset,-1*offset)
+   return clamp( value+randomIntRange(offset,-1*offset), 0, 255)
  }
 
 function testFunction(){
     console.log('Testing');
+}
+
+function clamp ( value, min, max ){
+  return value <= min ? min : value >= max ? max : value
 }
