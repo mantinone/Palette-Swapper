@@ -1,6 +1,34 @@
 class Color {
   constructor( r=5, g=5, b=5 ){
       this.rgb = {r,g,b}
+      this.hsv = Color.rgbToHsv( this.rgb )
+  }
+
+  static rgbToHsv( rgb ){
+    let hsv = {}
+    let max = Math.max(rgb.r,rgb.g,rgb.b)
+    let min = Math.min(rgb.r,rgb.g,rgb.b)
+    let delta = max - min
+
+    if( rgb.r === max ){
+      hsv.h = ((rgb.g-rgb.b)/delta)
+    } else if ( rgb.g === max) {
+      hsv.h = 2 + ((rgb.b-rgb.r)/delta)
+    } else {
+      hsv.h = 4 + ((rgb.r-rgb.g)/delta)
+    }
+    hsv.h *= 60
+    if( hsv.h < 0 ){hsv.h += 360}
+
+    if( max === 0 ){
+      hsv.s = 0
+    } else {
+      hsv.s = delta/max
+    }
+
+    hsv.v = max/255
+
+    return hsv
   }
 
   static hexToDec( hex ){
