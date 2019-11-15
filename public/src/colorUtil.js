@@ -5,7 +5,7 @@ class Color {
   }
 
   static rgbToHsv( rgb ){
-    let hsv = {}
+    let hsv = { h:0, s:0, v:0}
     let max = Math.max(rgb.r,rgb.g,rgb.b)
     let min = Math.min(rgb.r,rgb.g,rgb.b)
     let delta = max - min
@@ -29,6 +29,53 @@ class Color {
     hsv.v = max/255
 
     return hsv
+  }
+
+  static hsvToRgb( hsv ){
+    let rgb = { r:0, g:0, b:0 }
+
+    let max = hsv.v * 255
+    console.log(max);
+    let delta = max * hsv.s
+    let min = max - delta
+
+
+    let hDiv = hsv.h/60
+
+    if( hsv.h <= 60 || hsv.h > 300 ){
+      rgb.r = max
+      if( hsv.h <= 60 ){
+        rgb.b = min
+        rgb.g = hDiv*delta + min
+      } else {
+        rgb.g = min
+        rgb.b = (6 - hDiv)*delta + min
+      }
+    } else if ( hsv.h > 60 && hsv.h <= 180 ){
+      rgb.g = max
+      if (hsv.h <= 120 ){
+        rgb.b = min
+        rgb.r = (2 - hDiv)*delta + min
+      } else {
+        rgb.r = min
+        rgb.b = (hDiv - 2)*delta + min
+      }
+    } else {
+      rgb.b = max
+      if ( hsv.h <= 240 ){
+        rgb.r = min
+        rgb.g = (4 - hDiv)*delta + min
+      } else {
+        rgb.g = min
+        rgb.r = (hDiv - 4)*delta + min
+      }
+    }
+
+    rgb.r = Math.round(rgb.r)
+    rgb.g = Math.round(rgb.g)
+    rgb.b = Math.round(rgb.b)
+
+    return rgb
   }
 
   static hexToDec( hex ){
