@@ -1,7 +1,11 @@
 class Color {
-  constructor( r=5, g=5, b=5 ){
+  constructor( r=5, g=5, b=5, hsv ){
       this.rgb = {r,g,b}
-      this.hsv = Color.rgbToHsv( this.rgb )
+      if( !hsv ){
+        this.hsv = Color.rgbToHsv( this.rgb )
+      } else {
+        this.hsv = Object.assign({}, hsv)
+      }
   }
 
   static rgbToHsv( rgb ){
@@ -35,7 +39,6 @@ class Color {
     let rgb = { r:0, g:0, b:0 }
 
     let max = hsv.v * 255
-    console.log(max);
     let delta = max * hsv.s
     let min = max - delta
 
@@ -92,6 +95,11 @@ class Color {
 
   static colorFromHex( cssHex ){
     return new Color( Color.hexToDec(cssHex.substr(1,2)), Color.hexToDec(cssHex.substr(3,2)), Color.hexToDec(cssHex.substr(5,2)) )
+  }
+
+  static colorFromHsv( hsv ){
+    let rgb = Color.hsvToRgb( hsv )
+    return new Color( rgb.r, rgb.g, rgb.b, hsv )
   }
 
   toCSS(){
